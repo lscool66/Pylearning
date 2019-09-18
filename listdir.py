@@ -26,10 +26,10 @@ def listdir(path:str='.', all = False, detail = False, human = False):
                 if human:
                     h = _get_human(st.st_size)
 
-                yield str(stat.filemode(st.st_mode), st.st_nlink, st.st_uid, st.st_gid, h,
+                yield (stat.filemode(st.st_mode), st.st_nlink, st.st_uid, st.st_gid, h,
                        datetime.datetime.fromtimestamp(st.st_atime).strftime('%Y-%m-%d %H:%M:%S'), file.name)
             else: #没有 -l
-                yield str(file.name,)
+                yield (file.name,)
 
     yield from sorted(_showdir(args.path, args.all, args.l, args.h), key = lambda x: x[-1])
 
